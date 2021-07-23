@@ -1,0 +1,47 @@
+<body class="body">
+  <div class="main">
+    <div class="example-container">
+      <h2>General styles</h2>
+
+      <div class="example-list">
+        <app-styles-block
+          *ngFor="let item of todo"
+          [item]="item"
+          (deleteItem)="onRemove($event)"
+        ></app-styles-block>
+        <button (click)="saveData()">Save</button>`
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h2>To do</h2>
+    
+      <div class="example-list">
+        <app-drag-block
+          [class]="'example-box2'"
+          *ngFor="let item of todo"
+          cdkDragBoundary=".example-list"
+          [item]="item"
+          [check]="false"
+          cdkDrag
+        >
+        </app-drag-block>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h2>Done</h2>
+
+      <div class="example-list">
+        <app-drag-block
+          class="example-box"
+          *ngFor="let item of done"
+          [item]="item"
+          [check]="true"
+          (onAdd)="onAdd($event)"
+        >
+        </app-drag-block>
+      </div>
+    </div>
+  </div>
+</body>

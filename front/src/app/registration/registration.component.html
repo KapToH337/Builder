@@ -1,0 +1,32 @@
+<div>
+  <div>
+    <h3>Registration</h3>
+  </div>
+  <div>
+    <form>
+      <div>
+        <label for="email">Email</label>
+        <input
+          [(ngModel)]="registerUserData.email"
+          name="email"
+          id="email"
+          type="email"
+          placeholder="email"
+          required
+        >
+      </div>
+      <div>
+        <label for="pas">Password</label>
+        <input
+          [(ngModel)]="registerUserData.password"
+          name="password"
+          id="pas"
+          type="password"
+          placeholder="password"
+          required
+        >
+      </div>
+      <button (click)="registerUser()">Register</button>
+    </form>
+  </div>
+</div>

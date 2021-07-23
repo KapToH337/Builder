@@ -1,0 +1,25 @@
+.inputBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.checkboxBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.inputBlock,
+.buttonBlock,
+.checkboxBlock,
+.selectBlock,
+.textareaBlock {
+  margin-top: 15px;
+  background-color: white;
+}
+
+.textarea {
+  max-width: 400px;
+}

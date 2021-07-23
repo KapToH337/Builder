@@ -1,0 +1,11 @@
+<header>
+  <a [routerLink]="['/']">
+    <h1>Builder</h1>
+  </a>
+
+  <a [routerLink]="['/login']">Login</a>
+  <a [routerLink]="['/register']">Registration</a>
+  <a (click)="logout()">Logout</a>
+</header>
+
+<router-outlet></router-outlet>

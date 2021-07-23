@@ -1,0 +1,63 @@
+<div
+  *ngIf="item.id.includes('Input')"
+  class="inputBlock"
+  (click)="onClick(item)"
+>
+  <label>{{item.placeholder}}</label>
+  <input
+    [ngStyle]="item.styles"
+    type="text"
+    [placeholder]="item.placeholder"
+    [disabled]="check"
+  >
+</div>
+
+<div
+  *ngIf="item.id.includes('Button')"
+  class="buttonBlock"
+  (click)="onClick(item)"
+>
+  <button
+    class="button"
+    [disabled]="check"
+    [ngStyle]="item.styles"
+  >
+    <span
+      class="span"
+    >
+      {{item.placeholder}}
+    </span>
+  </button>
+</div>
+
+<div
+  *ngIf="item.id.includes('checkbox')"
+  class="checkboxBlock"
+  (click)="onClick(item)"
+>
+  <input [ngStyle]="item.styles" type="checkbox" [disabled]="check">
+  <label>{{item.placeholder}}</label>
+</div>
+
+<div
+  *ngIf="item.id.includes('Select')"
+  class="selectBlock"
+  (click)="onClick(item)"
+>
+  <select [ngStyle]="item.styles" [disabled]="check">
+    <option value="Select">{{item.placeholder}}</option>
+  </select>
+</div>
+
+<div
+  *ngIf="item.id.includes('Textarea')"
+  class="textareaBlock"
+  (click)="onClick(item)"
+>
+  <textarea
+    [ngStyle]="item.styles"
+    class="textarea"
+    [placeholder]="item.placeholder"
+    [disabled]="check"
+  ></textarea>
+</div>
