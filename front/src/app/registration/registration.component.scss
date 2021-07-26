@@ -1,0 +1,58 @@
+.autoz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    color: green;
+  }
+
+  &__form {
+    padding: 25px;
+
+    border: 5px solid green;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 25px;
+  }
+
+  &__form-block {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__label {
+    color: green;
+  }
+
+  &__input {
+    outline: none;
+    border: 1px solid green;
+    border-radius: 5px;
+
+    color: green;
+
+    padding: 10px;
+  }
+
+  &__input::placeholder {
+    color: green;
+  }
+
+  &__button {
+    padding: 10px 15px;
+
+    border: none;
+    border-radius: 5px;
+    background-color: green;
+    color: #fff;
+  }
+}

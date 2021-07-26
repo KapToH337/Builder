@@ -1,1 +1,45 @@
+.header {
+  padding: 0 25px;
 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: green;
+
+  &__title-link {
+    padding: 20px;
+
+    text-decoration: none;
+    color: #fff;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__autoriz {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  &__autoriz-link {
+    padding: 30px 10px;
+
+    text-decoration: none;
+    color: #fff;
+  }
+
+  &__autoriz-email {
+    color: #fff;
+  }
+
+  &__title-link:hover,
+  &__autoriz-link:hover {
+    text-decoration: underline;
+  }
+}

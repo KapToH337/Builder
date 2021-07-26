@@ -1,12 +1,13 @@
-<div>
+<div class="autoz">
   <div>
-    <h3>Login</h3>
+    <h2 class="autoz__title">Login</h2>
   </div>
   <div>
-    <form>
-      <div>
-        <label for="email">Login</label>
+    <form class="autoz__form">
+      <div class="autoz__form-block">
+        <label for="email" class="autoz__label">Login</label>
         <input
+          class="autoz__input"
           [(ngModel)]="loginUserData.email"
           name="email"
           id="email"
@@ -15,9 +16,10 @@
           required
         >
       </div>
-      <div>
-        <label for="pas">Password</label>
+      <div class="autoz__form-block">
+        <label for="pas" class="autoz__label">Password</label>
         <input
+          class="autoz__input"
           [(ngModel)]="loginUserData.password"
           name="password"
           id="pas"
@@ -26,7 +28,7 @@
           required
         >
       </div>
-      <button (click)="loginUser()">Login</button>
+      <button (click)="loginUser()" class="autoz__button">Login</button>
     </form>
   </div>
 </div>

@@ -1,11 +1,23 @@
-<header>
-  <a [routerLink]="['/']">
-    <h1>Builder</h1>
+<header class="header">
+  <a [routerLink]="['/']" class="header__title-link">
+    <h1 class="header__title">Builder</h1>
   </a>
 
-  <a [routerLink]="['/login']">Login</a>
-  <a [routerLink]="['/register']">Registration</a>
-  <a (click)="logout()">Logout</a>
+  <div *ngIf="email === ''" class="header__autoriz">
+    <a [routerLink]="['/login']" class="header__autoriz-link">Login</a>
+    <a [routerLink]="['/register']" class="header__autoriz-link">Registration</a>
+  </div>
+
+  <div *ngIf="email.length !== 0" class="header__autoriz">
+    <p class="header__autoriz-email">{{email}}</p>
+    <a
+      class="header__autoriz-link"
+      [routerLink]="['/login']"
+      (click)="logout()"
+    >
+      Logout
+    </a>
+  </div>
 </header>
 
 <router-outlet></router-outlet>

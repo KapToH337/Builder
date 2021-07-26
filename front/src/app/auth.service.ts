@@ -11,6 +11,7 @@ export class AuthService {
   private _loginedUrl = "http://localhost:3000/api/logined"
   constructor(private http: HttpClient) { }
 
+  //go to server
   registerUser = (user: object) => {
     return this.http.post(this._registerUrl, user)
   }

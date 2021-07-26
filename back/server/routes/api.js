@@ -86,7 +86,7 @@ router.get('/logined', tokenAuth, (req, res) => {
     if (err) {
       console.log(err)
     } else {
-      res.status(200).send(user.userOption)
+      res.status(200).send({email: user.email, option: user.userOption})
     }
   })
 })

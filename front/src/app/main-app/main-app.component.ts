@@ -9,7 +9,6 @@ import { AuthService } from '../auth.service';
 export class MainAppComponent implements OnInit {
 
   todo: any = [];
-  count: number = 0;
 
   done = [
     {id: 'Input', placeholder: 'Input', styles: {width: '200px', height: '30px', border: '2px solid black', borderRadius: '5px', color: 'black'}},
@@ -22,7 +21,7 @@ export class MainAppComponent implements OnInit {
   onAdd = (item: any) => {
     if (this.todo.some((todo: any) => todo.id === item.id + this.todo.length)) {
       this.todo.push({
-        id: item.id + this.count++,
+        id: item.id + Date.now(),
         placeholder: item.placeholder,
         styles: item.styles
       })
@@ -44,7 +43,7 @@ export class MainAppComponent implements OnInit {
   ngOnInit(): void {
     this._auth.optionUser()
       .subscribe(
-        res => this.todo = res,
+        (res: any) => this.todo = res.option,
         err => console.log(err)
       )
   }
