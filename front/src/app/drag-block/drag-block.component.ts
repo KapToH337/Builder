@@ -12,12 +12,12 @@ export class DragBlockComponent implements OnInit {
 
   @Output() onAdd = new EventEmitter()
 
-  onClick = (item: string) => {
-    this.onAdd.emit(item)
-  }
-
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onClick = (item: string) => {
+    this.onAdd.emit(item)
   }
 }

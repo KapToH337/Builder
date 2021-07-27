@@ -1,8 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth.service';
-import { Store } from '@ngrx/store';
 import { getEmail } from '../reducers/email';
 
 @Component({

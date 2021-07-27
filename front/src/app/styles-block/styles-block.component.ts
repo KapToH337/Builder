@@ -18,6 +18,11 @@ export class StylesBlockComponent implements OnInit {
   keys: Array<string> = []
   obj: any = {}
 
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
   onSelect = (item: string) => {
     if (this.active !== item) {
       this.active = item
@@ -56,10 +61,5 @@ export class StylesBlockComponent implements OnInit {
 
   onDelete = (item: string) => {
     this.deleteItem.emit(item)
-  }
-
-  constructor() { }
-
-  ngOnInit(): void {
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -18,6 +19,16 @@ export class MainAppComponent implements OnInit {
     {id: 'Textarea', placeholder: 'Textarea', styles: {width: '200px', height: '50px', border: '2px solid black', color: 'black'}}
   ];
 
+  constructor(private _auth: AuthService) { }
+
+  ngOnInit(): void {
+    this._auth.optionUser()
+      .subscribe(
+        (res: any) => this.todo = res.option,
+        err => console.log(err)
+      )
+  }
+
   onAdd = (item: any) => {
     if (this.todo.some((todo: any) => todo.id === item.id + this.todo.length)) {
       this.todo.push({
@@ -36,16 +47,6 @@ export class MainAppComponent implements OnInit {
 
   onRemove = (item: string) => {
     this.todo.splice(this.todo.findIndex((i: any) => i.id === item), 1)
-  }
-
-  constructor(private _auth: AuthService) { }
-
-  ngOnInit(): void {
-    this._auth.optionUser()
-      .subscribe(
-        (res: any) => this.todo = res.option,
-        err => console.log(err)
-      )
   }
 
   saveData = () => {
