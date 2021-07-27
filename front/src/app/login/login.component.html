@@ -5,10 +5,22 @@
   <div>
     <form class="autoz__form">
       <div class="autoz__form-block">
-        <label for="email" class="autoz__label">Login</label>
+        <label
+          [ngClass]="{
+            'autoz__invalid-text': emailInvalid,
+            'autoz__label': true
+          }"
+          for="email"
+        >
+          Login
+        </label>
         <input
-          class="autoz__input"
+          [ngClass]="{
+            'autoz__invalid': emailInvalid,
+            'autoz__input': true
+          }"
           [(ngModel)]="loginUserData.email"
+          (input)="change()"
           name="email"
           id="email"
           type="email"
@@ -16,11 +28,25 @@
           required
         >
       </div>
+      <p *ngIf="emailInvalid" class="autoz__invalid-text">Email invalid</p>
+
       <div class="autoz__form-block">
-        <label for="pas" class="autoz__label">Password</label>
+        <label
+          [ngClass]="{
+            'autoz__invalid-text': passwordInvalid,
+            'autoz__label': true
+          }"
+          for="pas"
+        >
+          Password
+        </label>
         <input
-          class="autoz__input"
+          [ngClass]="{
+            'autoz__invalid': passwordInvalid,
+            'autoz__input': true
+          }"
           [(ngModel)]="loginUserData.password"
+          (input)="change()"
           name="password"
           id="pas"
           type="password"
@@ -28,6 +54,8 @@
           required
         >
       </div>
+      <p *ngIf="passwordInvalid" class="autoz__invalid-text">Password invalid</p>
+
       <button (click)="loginUser()" class="autoz__button">Login</button>
     </form>
   </div>

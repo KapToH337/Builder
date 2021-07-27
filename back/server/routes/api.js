@@ -19,7 +19,7 @@ const tokenAuth = (req, res, next) => {
    req.tokenData = jwt.verify(token, 'userKey')
    next()
   } catch (err) {
-    return res.status(401).send('BLALALA')
+    return res.status(401).send('There is no user')
   }
 }
 

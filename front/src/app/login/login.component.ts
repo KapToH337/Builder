@@ -24,16 +24,30 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
+  emailInvalid: boolean = false
+  passwordInvalid: boolean = false
+
+  change = () => {
+    this.emailInvalid = false
+    this.passwordInvalid = false
+  }
+
   loginUser = () => {
-    this.store.dispatch(getEmail({email: this.loginUserData.email}))
     this._auth.loginUser(this.loginUserData)
       .subscribe(
         (res: any) => {
+          this.store.dispatch(getEmail({email: this.loginUserData.email}))
           localStorage.setItem('token', res.token)
           this.loginUserData.email = this.loginUserData.password = ''
           this._router.navigate(['/'])
         },
-        err => console.log(err)
+        (err)=> {
+          if (err.error === 'Invalid email') {
+            this.emailInvalid = true
+          } else {
+            this.passwordInvalid = true
+          }
+        }
       )
 
     this.loginUserData.password = ''

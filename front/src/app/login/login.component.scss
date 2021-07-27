@@ -21,7 +21,7 @@
   }
 
   &__form-block {
-    width: 100%;
+    width: 400px;
 
     display: flex;
     flex-direction: row;
@@ -45,6 +45,20 @@
 
   &__input::placeholder {
     color: green;
+  }
+
+  &__invalid {
+    border: 1px solid red;
+  }
+
+  &__invalid::placeholder {
+    color: red;
+  }
+
+  &__invalid-text {
+    margin: 0;
+
+    color: red;
   }
 
   &__button {
