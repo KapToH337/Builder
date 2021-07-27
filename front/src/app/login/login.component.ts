@@ -5,6 +5,11 @@ import { Store } from '@ngrx/store';
 import { AuthService } from '../auth.service';
 import { getEmail } from '../reducers/email';
 
+export interface LoginUserData {
+  email: string,
+  password: string
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginUserData = {
+  loginUserData: LoginUserData = {
     email: '',
     password: ''
   }

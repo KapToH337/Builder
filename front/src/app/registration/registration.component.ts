@@ -5,6 +5,12 @@ import { Store } from '@ngrx/store';
 import { AuthService } from '../auth.service';
 import { getEmail } from '../reducers/email';
 
+export interface RegisterUsrDatat {
+  email: string,
+  password: string,
+  userOption: Array<object>
+}
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
