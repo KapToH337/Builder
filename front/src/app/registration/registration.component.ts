@@ -18,7 +18,7 @@ export class RegistrationComponent implements OnInit {
     userOption: []
   }
 
-  validationInvalid: boolean = false
+  emailInvalid: boolean = false
   passwordInvalidLength: boolean = false
 
   constructor(private _auth: AuthService,
@@ -28,13 +28,13 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void { }
 
   change = () => {
-    this.validationInvalid = false
+    this.emailInvalid = false
     this.passwordInvalidLength = false
   }
 
   registerUser = () => {
     if (this.registerUserData.email.trim() === '') {
-      this.validationInvalid = true
+      this.emailInvalid = true
       this.registerUserData.password = ''
       return
     } else if (this.registerUserData.password.length < 6 || this.registerUserData.password.trim() === '') {

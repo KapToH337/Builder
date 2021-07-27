@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class StylesBlockComponent implements OnInit {
 
-  @Input() item!: any
+  @Input() item?: any
 
   @Output() deleteItem = new EventEmitter()
   @Output() redact = new EventEmitter()

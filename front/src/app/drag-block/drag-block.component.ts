@@ -7,8 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class DragBlockComponent implements OnInit {
 
-  @Input() item!: any
-  @Input() check!: boolean
+  @Input() item?: any
+  @Input() check?: boolean
 
   @Output() onAdd = new EventEmitter()
 

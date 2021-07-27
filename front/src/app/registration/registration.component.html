@@ -7,7 +7,7 @@
       <div class="autoz__form-block">
         <label
           [ngClass]="{
-            'autoz__invalid-text': validationInvalid,
+            'autoz__invalid-text': emailInvalid,
             'autoz__label': true
           }"
           for="email"
@@ -16,7 +16,7 @@
         </label>
         <input
           [ngClass]="{
-            'autoz__invalid': validationInvalid,
+            'autoz__invalid': emailInvalid,
             'autoz__input': true
           }"
           [(ngModel)]="registerUserData.email"
@@ -28,12 +28,12 @@
           required
         >
       </div>
-      <p *ngIf="validationInvalid" class="autoz__invalid-text">Email invalid</p>
+      <p *ngIf="emailInvalid" class="autoz__invalid-text">Email invalid</p>
 
       <div class="autoz__form-block">
         <label
           [ngClass]="{
-            'autoz__invalid-text': validationInvalid || passwordInvalidLength,
+            'autoz__invalid-text': emailInvalid || passwordInvalidLength,
             'autoz__label': true
           }"
           for="pas"
@@ -42,7 +42,7 @@
         </label>
         <input
           [ngClass]="{
-            'autoz__invalid': validationInvalid || passwordInvalidLength,
+            'autoz__invalid': emailInvalid || passwordInvalidLength,
             'autoz__input': true
           }"
           [(ngModel)]="registerUserData.password"

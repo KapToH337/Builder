@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from './auth.service';
@@ -17,8 +16,7 @@ export class AppComponent {
   email$ = this.store.select(emailSelector).subscribe(res => this.email = res)
   emails: any
 
-  constructor(private _router: Router,
-    private _auth: AuthService,
+  constructor(private _auth: AuthService,
     private store: Store) { }
 
   ngOnInit(): void {
