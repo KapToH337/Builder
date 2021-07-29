@@ -17,8 +17,8 @@ export interface LoginUserData {
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _auth: AuthService,
-    private _router: Router,
+  constructor(private authService: AuthService,
+    private router: Router,
     private store: Store) { }
 
   ngOnInit(): void {
@@ -32,21 +32,21 @@ export class LoginComponent implements OnInit {
   emailInvalid: boolean = false
   passwordInvalid: boolean = false
 
-  change = () => {
+  change(): void {
     this.emailInvalid = false
     this.passwordInvalid = false
   }
 
-  loginUser = () => {
-    this._auth.loginUser(this.loginUserData)
+  loginUser(): void {
+    this.authService.loginUser(this.loginUserData)
       .subscribe(
         (res: any) => {
           this.store.dispatch(getEmail({email: this.loginUserData.email}))
           localStorage.setItem('token', res.token)
           this.loginUserData.email = this.loginUserData.password = ''
-          this._router.navigate(['/'])
+          this.router.navigate(['/'])
         },
-        (err)=> {
+        (err) => {
           if (err.error === 'Invalid email') {
             this.emailInvalid = true
           } else {

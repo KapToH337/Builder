@@ -18,7 +18,7 @@ export interface RegisterUsrDatat {
 })
 export class RegistrationComponent implements OnInit {
 
-  registerUserData = {
+  registerUserData: RegisterUsrDatat = {
     email: '',
     password: '',
     userOption: []
@@ -27,18 +27,18 @@ export class RegistrationComponent implements OnInit {
   emailInvalid: boolean = false
   passwordInvalidLength: boolean = false
 
-  constructor(private _auth: AuthService,
-    private _router: Router,
+  constructor(private authService: AuthService,
+    private router: Router,
     private store: Store) { }
 
   ngOnInit(): void { }
 
-  change = () => {
+  change(): void {
     this.emailInvalid = false
     this.passwordInvalidLength = false
   }
 
-  registerUser = () => {
+  registerUser(): void {
     if (this.registerUserData.email.trim() === '') {
       this.emailInvalid = true
       this.registerUserData.password = ''
@@ -50,11 +50,11 @@ export class RegistrationComponent implements OnInit {
     } else {
       this.store.dispatch(getEmail({email: this.registerUserData.email}))
 
-      this._auth.registerUser(this.registerUserData)
+      this.authService.registerUser(this.registerUserData)
         .subscribe(
           (res: any) => {
             localStorage.setItem('token', res.token)
-            this._router.navigate(['/'])
+            this.router.navigate(['/'])
           },
           err => console.log(err)
         )

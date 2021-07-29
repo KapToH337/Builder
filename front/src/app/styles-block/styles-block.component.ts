@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { ConstructBlock, stylesBlock } from '../main-app/main-app.component';
+
 @Component({
   selector: 'app-styles-block',
   templateUrl: './styles-block.component.html',
@@ -7,7 +9,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class StylesBlockComponent implements OnInit {
 
-  @Input() item?: any
+  @Input() item!: ConstructBlock
 
   @Output() deleteItem = new EventEmitter()
   @Output() redact = new EventEmitter()
@@ -16,14 +18,14 @@ export class StylesBlockComponent implements OnInit {
   change: boolean = false
 
   keys: Array<string> = []
-  obj: any = {}
+  obj: stylesBlock = {}
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onSelect = (item: string) => {
+  onSelect(item: string): void {
     if (this.active !== item) {
       this.active = item
     } else {
@@ -37,11 +39,11 @@ export class StylesBlockComponent implements OnInit {
     }
   }
 
-  onChange = () => {
+  onChange(): void {
     this.change = !this.change
   }
 
-  onStyle = (key : string, event: any) => {
+  onStyle(key : string, event: any): void {
     if (this.obj.width === undefined) {
       this.obj = Object.assign({}, this.item.styles)
     }
@@ -49,7 +51,7 @@ export class StylesBlockComponent implements OnInit {
     this.obj[key] = event.target.value
   }
 
-  onApply = () => {
+  onApply(): void {
     this.change = false
     this.active = ''
     const obj = Object.assign({}, this.obj)
@@ -59,7 +61,7 @@ export class StylesBlockComponent implements OnInit {
     }
   }
 
-  onDelete = (item: string) => {
+  onDelete(item: string): void {
     this.deleteItem.emit(item)
   }
 }

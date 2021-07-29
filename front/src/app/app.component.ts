@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from './auth.service';
 import { emailSelector, getEmail } from './reducers/email';
@@ -13,28 +14,26 @@ export class AppComponent {
 
   email: string = ''
 
-  email$ = this.store.select(emailSelector).subscribe(res => this.email = res)
-  emails: any
+  email$: Subscription = this.store.select(emailSelector).subscribe(res => this.email = res)
 
-  constructor(private _auth: AuthService,
+  constructor(private authService: AuthService,
     private store: Store) { }
 
   ngOnInit(): void {
-    this.emails = this._auth.optionUser()
+    this.email$ = this.authService.optionUser()
       .subscribe(
         (res: any) => this.email = res.email,
         err => console.log(err)
       )
   }
 
-  ngOnDestroy(): void {
-    this.email$.unsubscribe()
-    this.emails.unsubscribe()
-  }
-
-  logout = () => {
+  logout() {
     this.email = ''
     this.store.dispatch(getEmail({email: ''}))
     localStorage.removeItem('token')
+  }
+  
+  ngOnDestroy(): void {
+    this.email$.unsubscribe()
   }
 }
