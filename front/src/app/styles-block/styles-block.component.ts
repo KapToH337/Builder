@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { ConstructBlock, stylesBlock } from '../main-app/main-app.component';
+import { constructBlock } from '../interface/IconstructBlock';
+import { stylesBlock } from '../interface/IstylesBlock';
+
 
 @Component({
   selector: 'app-styles-block',
@@ -9,7 +11,7 @@ import { ConstructBlock, stylesBlock } from '../main-app/main-app.component';
 })
 export class StylesBlockComponent implements OnInit {
 
-  @Input() item!: ConstructBlock
+  @Input() item!: constructBlock
 
   @Output() deleteItem = new EventEmitter()
   @Output() redact = new EventEmitter()
@@ -43,12 +45,12 @@ export class StylesBlockComponent implements OnInit {
     this.change = !this.change
   }
 
-  onStyle(key : string, event: any): void {
+  onStyle(key: string, event: Event): void {
     if (this.obj.width === undefined) {
       this.obj = Object.assign({}, this.item.styles)
     }
 
-    this.obj[key] = event.target.value
+    this.obj[key] = (<HTMLInputElement>event.target).value
   }
 
   onApply(): void {

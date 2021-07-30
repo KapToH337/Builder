@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth.service';
 import { getEmail } from '../reducers/email';
 
-export interface RegisterUsrDatat {
-  email: string,
-  password: string,
-  userOption: Array<object>
-}
+import { registerUesrDatat } from '../interface/IregisterUserDatat';
+import { tokenInterface } from '../interface/ItokenInterface';
+
 
 @Component({
   selector: 'app-registration',
@@ -18,48 +17,57 @@ export interface RegisterUsrDatat {
 })
 export class RegistrationComponent implements OnInit {
 
-  registerUserData: RegisterUsrDatat = {
+  registerUserData: registerUesrDatat = {
     email: '',
     password: '',
     userOption: []
   }
 
+  form: FormGroup = new FormGroup({
+    email: new FormControl('', [
+      Validators.email,
+      Validators.required
+    ]),
+    password: new FormControl('', [
+      Validators.minLength(6)
+    ])
+  })
+
   emailInvalid: boolean = false
-  passwordInvalidLength: boolean = false
+  passwordInvalid: boolean = false
 
   constructor(private authService: AuthService,
     private router: Router,
     private store: Store) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   change(): void {
     this.emailInvalid = false
-    this.passwordInvalidLength = false
+    this.passwordInvalid = false
   }
 
   registerUser(): void {
-    if (this.registerUserData.email.trim() === '') {
+    this.registerUserData.email = this.form.value.email
+    this.registerUserData.password = this.form.value.password
+
+    if (this.form.get('email')?.invalid) {
       this.emailInvalid = true
-      this.registerUserData.password = ''
-      return
-    } else if (this.registerUserData.password.length < 6 || this.registerUserData.password.trim() === '') {
-      this.passwordInvalidLength = true
-      this.registerUserData.password = ''
-      return
+      this.form.patchValue({ password: '' })
+    } else if (this.form.get('password')?.invalid) {
+      this.passwordInvalid = true
+      this.form.patchValue({ password: '' })
     } else {
       this.store.dispatch(getEmail({email: this.registerUserData.email}))
 
       this.authService.registerUser(this.registerUserData)
         .subscribe(
-          (res: any) => {
-            localStorage.setItem('token', res.token)
+          (res: tokenInterface) => {
+            localStorage.setItem('token', String(res.token))
             this.router.navigate(['/'])
           },
           err => console.log(err)
         )
     }
-
-    this.registerUserData.email = this.registerUserData.password = ''
   }
 }

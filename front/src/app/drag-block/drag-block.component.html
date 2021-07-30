@@ -5,8 +5,8 @@
 >
   <label>{{item.placeholder}}</label>
   <input
-    [ngStyle]="item.styles"
     type="text"
+    [ngStyle]="item.styles"
     [placeholder]="item.placeholder"
     [disabled]="check"
   >
@@ -22,11 +22,7 @@
     [disabled]="check"
     [ngStyle]="item.styles"
   >
-    <span
-      class="span"
-    >
-      {{item.placeholder}}
-    </span>
+    <span class="span">{{item.placeholder}}</span>
   </button>
 </div>
 
@@ -35,7 +31,7 @@
   class="checkboxBlock"
   (click)="onClick(item)"
 >
-  <input [ngStyle]="item.styles" type="checkbox" [disabled]="check">
+  <input type="checkbox" [ngStyle]="item.styles" [disabled]="check">
   <label>{{item.placeholder}}</label>
 </div>
 

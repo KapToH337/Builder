@@ -1,62 +1,60 @@
-<div class="autoz">
+<div class="autorization">
   <div>
-    <h2 class="autoz__title">Login</h2>
+    <h2 class="autorization__title">Login</h2>
   </div>
   <div>
-    <form class="autoz__form">
-      <div class="autoz__form-block">
+    <form class="autorization__form">
+      <div class="autorization__form-block">
         <label
-          [ngClass]="{
-            'autoz__invalid-text': emailInvalid,
-            'autoz__label': true
-          }"
           for="email"
+          [ngClass]="{
+            'autorization__invalid-text': emailInvalid,
+            'autorization__label': true
+          }"
         >
           Login
         </label>
         <input
-          [ngClass]="{
-            'autoz__invalid': emailInvalid,
-            'autoz__input': true
-          }"
-          [(ngModel)]="loginUserData.email"
-          (input)="change()"
           name="email"
           id="email"
           type="email"
           placeholder="login"
-          required
+          [ngClass]="{
+            'autorization__invalid': emailInvalid,
+            'autorization__input': true
+          }"
+          [(ngModel)]="loginUserData.email"
+          (input)="change()"
         >
       </div>
-      <p *ngIf="emailInvalid" class="autoz__invalid-text">Email invalid</p>
+      <p *ngIf="emailInvalid" class="autorization__invalid-text">Email invalid</p>
 
-      <div class="autoz__form-block">
+      <div class="autorization__form-block">
         <label
-          [ngClass]="{
-            'autoz__invalid-text': passwordInvalid,
-            'autoz__label': true
-          }"
           for="pas"
+          [ngClass]="{
+            'autorization__invalid-text': passwordInvalid,
+            'autorization__label': true
+          }"
         >
           Password
         </label>
         <input
-          [ngClass]="{
-            'autoz__invalid': passwordInvalid,
-            'autoz__input': true
-          }"
-          [(ngModel)]="loginUserData.password"
-          (input)="change()"
           name="password"
           id="pas"
           type="password"
           placeholder="password"
-          required
+          [ngClass]="{
+            'autorization__invalid': passwordInvalid,
+            'autorization__input': true
+          }"
+          [(ngModel)]="loginUserData.password"
+          (input)="change()"
         >
       </div>
-      <p *ngIf="passwordInvalid" class="autoz__invalid-text">Password invalid</p>
+      <p *ngIf="passwordInvalid" class="autorization__invalid-text">Password invalid</p>
 
-      <button (click)="loginUser()" class="autoz__button">Login</button>
+      <button class="autorization__button" (click)="loginUser()">Login</button>
     </form>
   </div>
 </div>

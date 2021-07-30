@@ -1,14 +1,14 @@
 <div class="block">
   <div class="header">
     <h3
-      (click)="onSelect(item.id)"
       class="title"
+      (click)="onSelect(item.id)"
     >
       {{item.placeholder}}
     </h3>
     <button (click)="onDelete(item.id)">Delete</button>
   </div>
-  <div class="styles-block" *ngIf="active === item.id">
+  <div *ngIf="active === item.id" class="styles-block">
     <div
       class="styles"
       *ngFor="let key of keys"
@@ -16,7 +16,12 @@
       <div class="change">
         <p>{{key}}:</p>
         <p *ngIf="!change">{{obj.width !== undefined ? obj[key] : item.styles[key]}}</p>
-        <input *ngIf="change" type="text" value="{{obj.width !== undefined ? obj[key] : item.styles[key]}}" (input)="onStyle(key, $event)">
+        <input
+          *ngIf="change"
+          type="text"
+          value="{{obj.width !== undefined ? obj[key] : item.styles[key]}}"
+          (input)="onStyle(key, $event)"
+        >
       </div>
     </div>
 

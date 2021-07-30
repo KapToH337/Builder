@@ -1,23 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 import { AuthService } from '../auth.service';
 
-export interface stylesBlock {
-  width?: string,
-  height?: string,
-  border?: string,
-  borderRadius?: string,
-  backgroundColor?: string,
-  color?: string,
-  [key: string]: string | undefined
-}
+import { constructBlock } from '../interface/IconstructBlock';
+import { userOption } from '../interface/IuserOption';
 
-export interface ConstructBlock {
-  id: string,
-  placeholder: string,
-  styles: stylesBlock
-}
 
 @Component({
   selector: 'app-main-app',
@@ -25,11 +14,12 @@ export interface ConstructBlock {
   styleUrls: ['./main-app.component.scss']
 })
 export class MainAppComponent implements OnInit {
+  private unsubscribe$ = new Subject
 
-  todo: Array<ConstructBlock> = [];
+  todo: Array<constructBlock> = [];
   private sub?: Subscription
 
-  done: Array<ConstructBlock> = [
+  done: Array<constructBlock> = [
     {id: 'Input', placeholder: 'Input', styles: {width: '200px', height: '30px', border: '2px solid black', borderRadius: '5px', color: 'black'}},
     {id: 'Button', placeholder: 'Button', styles: {width: '50px', height: '30px', border: 'none', borderRadius: '10px', backgroundColor: 'blue', color: 'white'}},
     {id: 'checkbox', placeholder: 'checkbox', styles: {}},
@@ -40,15 +30,16 @@ export class MainAppComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.sub = this.authService.optionUser()
+    this.authService.optionUser()
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
-        (res: any) => this.todo = res.option,
+        (res: userOption) => this.todo = res.option!,
         err => console.log(err)
       )
   }
 
-  onAdd(item: ConstructBlock): void {
-    if (this.todo.some((todo: any) => todo.id === item.id + this.todo.length)) {
+  onAdd(item: constructBlock): void {
+    if (this.todo.some((todo: constructBlock) => todo.id === item.id + this.todo.length)) {
       this.todo.push({
         id: item.id + Date.now(),
         placeholder: item.placeholder,
@@ -64,7 +55,7 @@ export class MainAppComponent implements OnInit {
   }
 
   onRemove(item: string): void {
-    this.todo.splice(this.todo.findIndex((i: any) => i.id === item), 1)
+    this.todo.splice(this.todo.findIndex((i: constructBlock) => i.id === item), 1)
   }
 
   saveData(): void {
@@ -76,7 +67,8 @@ export class MainAppComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.sub?.unsubscribe()
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 
 }

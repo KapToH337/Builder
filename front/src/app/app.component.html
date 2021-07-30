@@ -1,14 +1,14 @@
 <header class="header">
-  <a [routerLink]="['/']" class="header__title-link">
+  <a class="header__title-link" [routerLink]="['/']">
     <h1 class="header__title">Builder</h1>
   </a>
 
   <div *ngIf="email === ''" class="header__autoriz">
-    <a [routerLink]="['/login']" class="header__autoriz-link">Login</a>
-    <a [routerLink]="['/register']" class="header__autoriz-link">Registration</a>
+    <a class="header__autoriz-link" [routerLink]="['/login']">Login</a>
+    <a class="header__autoriz-link" [routerLink]="['/register']">Registration</a>
   </div>
 
-  <div *ngIf="email.length !== 0" class="header__autoriz">
+  <div *ngIf="email?.length !== 0" class="header__autoriz">
     <p class="header__autoriz-email">{{email}}</p>
     <a
       class="header__autoriz-link"

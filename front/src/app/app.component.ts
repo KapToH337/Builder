@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
 
 import { AuthService } from './auth.service';
 import { emailSelector, getEmail } from './reducers/email';
+
+import { userOption } from './interface/IuserOption';
+
 
 @Component({
   selector: 'app-root',
@@ -11,18 +15,22 @@ import { emailSelector, getEmail } from './reducers/email';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  private unsubscribe$ = new Subject
 
-  email: string = ''
+  email?: string = ''
 
-  email$: Subscription = this.store.select(emailSelector).subscribe(res => this.email = res)
+  email$: Subscription = this.store.select(emailSelector)
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(res => this.email = res)
 
   constructor(private authService: AuthService,
     private store: Store) { }
 
   ngOnInit(): void {
-    this.email$ = this.authService.optionUser()
+    this.authService.optionUser()
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
-        (res: any) => this.email = res.email,
+        (res: userOption) => this.email = res.email,
         err => console.log(err)
       )
   }
@@ -34,6 +42,7 @@ export class AppComponent {
   }
   
   ngOnDestroy(): void {
-    this.email$.unsubscribe()
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 }

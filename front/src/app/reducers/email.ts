@@ -1,9 +1,9 @@
 import { createAction, createFeatureSelector, createReducer, createSelector, on, props } from "@ngrx/store";
 
-export const getEmail = createAction('[EMAIL] email', props<{email: string}>())
+export const getEmail = createAction('[EMAIL] email', props<{email?: string}>())
 
 export interface EmailState {
-  email: string
+  email?: string
 }
 
 export const initialEmail: EmailState = {

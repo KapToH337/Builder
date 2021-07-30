@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { ConstructBlock } from '../main-app/main-app.component';
+import { constructBlock } from '../interface/IconstructBlock';
+
 
 @Component({
   selector: 'app-drag-block',
@@ -9,7 +10,7 @@ import { ConstructBlock } from '../main-app/main-app.component';
 })
 export class DragBlockComponent implements OnInit {
 
-  @Input() item!: ConstructBlock
+  @Input() item!: constructBlock
   @Input() check?: boolean
 
   @Output() onAdd = new EventEmitter()
@@ -19,7 +20,7 @@ export class DragBlockComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClick(item: ConstructBlock): void {
+  onClick(item: constructBlock): void {
     this.onAdd.emit(item)
   }
 }

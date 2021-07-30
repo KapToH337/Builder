@@ -9,9 +9,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to Mongdb'))
   .catch(err => console.log(err))
 
-router.get('/', (req, res) => {
-  res.send('From API route')
-})
+
 
 const tokenAuth = (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];

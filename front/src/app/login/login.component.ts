@@ -5,10 +5,9 @@ import { Store } from '@ngrx/store';
 import { AuthService } from '../auth.service';
 import { getEmail } from '../reducers/email';
 
-export interface LoginUserData {
-  email: string,
-  password: string
-}
+import { loginUserData } from '../interface/IloginUserData';
+import { tokenInterface } from '../interface/ItokenInterface';
+
 
 @Component({
   selector: 'app-login',
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginUserData: LoginUserData = {
+  loginUserData: loginUserData = {
     email: '',
     password: ''
   }
@@ -40,10 +39,9 @@ export class LoginComponent implements OnInit {
   loginUser(): void {
     this.authService.loginUser(this.loginUserData)
       .subscribe(
-        (res: any) => {
+        (res: tokenInterface) => {
           this.store.dispatch(getEmail({email: this.loginUserData.email}))
-          localStorage.setItem('token', res.token)
-          this.loginUserData.email = this.loginUserData.password = ''
+          localStorage.setItem('token', String(res.token))
           this.router.navigate(['/'])
         },
         (err) => {
