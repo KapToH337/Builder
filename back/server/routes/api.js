@@ -79,7 +79,7 @@ router.put('/login', tokenAuth, (req, res) => {
   )
 })
 
-router.get('/logined', tokenAuth, (req, res) => {
+router.get('/login', tokenAuth, (req, res) => {
   User.findOne({_id: req.tokenData.subject}, (err, user) => {
     if (err) {
       console.log(err)

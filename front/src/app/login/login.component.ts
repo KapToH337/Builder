@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AuthService } from '../auth.service';
 import { getEmail } from '../reducers/email';
 
-import { loginUserData } from '../interface/IloginUserData';
+import { loginUserData } from './login.interfaces';
 import { tokenInterface } from '../interface/ItokenInterface';
 
 
@@ -23,20 +23,20 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginUserData: loginUserData = {
+  public loginUserData: loginUserData = {
     email: '',
     password: ''
   }
 
-  emailInvalid: boolean = false
-  passwordInvalid: boolean = false
+  public emailInvalid: boolean = false
+  public passwordInvalid: boolean = false
 
-  change(): void {
+  public change(): void {
     this.emailInvalid = false
     this.passwordInvalid = false
   }
 
-  loginUser(): void {
+  public loginUser(): void {
     this.authService.loginUser(this.loginUserData)
       .subscribe(
         (res: tokenInterface) => {

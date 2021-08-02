@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { constructBlock } from '../interface/IconstructBlock';
-import { stylesBlock } from '../interface/IstylesBlock';
+import { mainConstructBlock } from '../main-app/main-app.interfaces';
+import { stylesBlock } from './styles-block.interfaces';
 
 
 @Component({
@@ -11,23 +11,23 @@ import { stylesBlock } from '../interface/IstylesBlock';
 })
 export class StylesBlockComponent implements OnInit {
 
-  @Input() item!: constructBlock
+  @Input() public item!: mainConstructBlock
 
-  @Output() deleteItem = new EventEmitter()
-  @Output() redact = new EventEmitter()
+  @Output() public deleteItem = new EventEmitter()
+  @Output() public redact = new EventEmitter()
 
-  active: string = ''
-  change: boolean = false
+  public active: string = ''
+  public change: boolean = false
 
-  keys: Array<string> = []
-  obj: stylesBlock = {}
+  public keys: Array<string> = []
+  public obj: stylesBlock = {}
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onSelect(item: string): void {
+  public onSelect(item: string): void {
     if (this.active !== item) {
       this.active = item
     } else {
@@ -41,11 +41,11 @@ export class StylesBlockComponent implements OnInit {
     }
   }
 
-  onChange(): void {
+  public onChange(): void {
     this.change = !this.change
   }
 
-  onStyle(key: string, event: Event): void {
+  public onStyle(key: string, event: Event): void {
     if (this.obj.width === undefined) {
       this.obj = Object.assign({}, this.item.styles)
     }
@@ -53,7 +53,7 @@ export class StylesBlockComponent implements OnInit {
     this.obj[key] = (<HTMLInputElement>event.target).value
   }
 
-  onApply(): void {
+  public onApply(): void {
     this.change = false
     this.active = ''
     const obj = Object.assign({}, this.obj)
@@ -63,7 +63,7 @@ export class StylesBlockComponent implements OnInit {
     }
   }
 
-  onDelete(item: string): void {
+  public onDelete(item: string): void {
     this.deleteItem.emit(item)
   }
 }

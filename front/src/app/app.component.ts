@@ -17,9 +17,9 @@ import { userOption } from './interface/IuserOption';
 export class AppComponent {
   private unsubscribe$ = new Subject
 
-  email?: string = ''
+  public email?: string = ''
 
-  email$: Subscription = this.store.select(emailSelector)
+  private email$: Subscription = this.store.select(emailSelector)
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(res => this.email = res)
 
@@ -27,7 +27,7 @@ export class AppComponent {
     private store: Store) { }
 
   ngOnInit(): void {
-    this.authService.optionUser()
+    this.authService.getOptionUser()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (res: userOption) => this.email = res.email,
@@ -35,7 +35,7 @@ export class AppComponent {
       )
   }
 
-  logout() {
+  public logout() {
     this.email = ''
     this.store.dispatch(getEmail({email: ''}))
     localStorage.removeItem('token')

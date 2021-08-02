@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tokenInterface } from './interface/ItokenInterface';
+import { userOption } from './interface/IuserOption';
 
 
 @Injectable({
@@ -10,31 +12,31 @@ export class AuthService {
 
   private _registerUrl = "http://localhost:3000/api/register"
   private _loginUrl = "http://localhost:3000/api/login"
-  private _loginedUrl = "http://localhost:3000/api/logined"
   constructor(private http: HttpClient) { }
 
   //go to server
-  registerUser(user: object) {
+  public registerUser(user: object): Observable<tokenInterface> {
     return this.http.post(this._registerUrl, user)
   }
 
-  loginUser(user: object) {
+  public loginUser(user: object): Observable<tokenInterface> {
     return this.http.post(this._loginUrl, user)
   }
 
-  loggedIn() {
+  public getLoggedIn(): boolean {
     return !!localStorage.getItem('token')
   }
 
-  getToken() {
+  public getToken(): string | null {
     return localStorage.getItem('token')
   }
 
-  loginedUser(user: object) {
+  public getOptionUser(): Observable<userOption> {
+    return this.http.get(this._loginUrl)
+  }
+
+  public optionUserChange(user: object): Observable<object> {
     return this.http.put(this._loginUrl, user)
   }
 
-  optionUser() {
-    return this.http.get(this._loginedUrl)
-  }
 }
