@@ -1,26 +1,24 @@
-import { StylesBlockComponent } from "./styles-block.component";
+import { StylesBlockComponent } from './styles-block.component';
 
 describe('StylesBlockComponent', () => {
-
-  let commponent: StylesBlockComponent
+  let commponent: StylesBlockComponent;
 
   beforeEach(() => {
-    commponent = new StylesBlockComponent()
-  })
+    commponent = new StylesBlockComponent();
+  });
 
   it('should increment value by event emitter', () => {
-    let result = ''
-    commponent.deleteItem.subscribe(value => result = value)
+    let result = '';
+    commponent.deleteItem.subscribe((value) => { result = value; });
 
-    commponent.onDelete('item')
+    commponent.onDelete('item');
 
-    expect(result).toBe('item')
-  })
+    expect(result).toBe('item');
+  });
 
   it('should change boolean value', () => {
-    commponent.change = false
-    commponent.onChange()
-    expect(commponent.change).toBe(true)
-  })
-
-})
+    commponent.change = false;
+    commponent.onChange();
+    expect(commponent.change).toBe(true);
+  });
+});

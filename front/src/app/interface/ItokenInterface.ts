@@ -1,3 +1,3 @@
-export interface tokenInterface {
-  token?: string
+export interface TokenInterface {
+  token?: string;
 }

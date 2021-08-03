@@ -1,20 +1,18 @@
-import { DragBlockComponent } from "./drag-block.component";
+import { DragBlockComponent } from './drag-block.component';
 
 describe('DragBlockComponent', () => {
-
-  let commponent: DragBlockComponent
+  let commponent: DragBlockComponent;
 
   beforeEach(() => {
-    commponent = new DragBlockComponent()
-  })
+    commponent = new DragBlockComponent();
+  });
 
   it('should increment value by event emitter', () => {
-    let result = ''
-    commponent.onAdd.subscribe(item => result = item)
+    let result = '';
+    commponent.onAdd.subscribe((item) => { result = item; });
 
-    commponent.onClick('item')
+    commponent.onClick({ id: 'input', placeholder: 'input', styles: {} });
 
-    expect(result).toBe('item')
-  })
-
-})
+    expect(result).toBe('input');
+  });
+});

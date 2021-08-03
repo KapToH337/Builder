@@ -7,6 +7,10 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AppComponent } from './app.component';
 import { DragBlockComponent } from './drag-block/drag-block.component';
 import { StylesBlockComponent } from './styles-block/styles-block.component';
@@ -16,11 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AuthGuard } from './auth.guard';
 import { TokenIterceptionService } from './token-iterception.service';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { reducers, metaReducers } from './reducers';
 import { AppEffects } from './app.effects';
 
@@ -31,7 +31,7 @@ import { AppEffects } from './app.effects';
     StylesBlockComponent,
     MainAppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,19 +44,22 @@ import { AppEffects } from './app.effects';
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(reducers, {
-      metaReducers
+      metaReducers,
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AppEffects]),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
   ],
-  providers: [AuthGuard,
+  providers: [
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenIterceptionService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
+
+export default AppModule;

@@ -1,7 +1,7 @@
-import { mainConstructBlock } from "../main-app/main-app.interfaces";
+import { mainConstructBlock } from '../main-app/main-app.interfaces';
 
-export interface registerUesrDatat {
-  email?: string,
-  password?: string,
-  userOption?: Array<mainConstructBlock>
+export interface RegisterUesrDatat {
+  email?: string;
+  password?: string;
+  userOption?: Array<mainConstructBlock>;
 }

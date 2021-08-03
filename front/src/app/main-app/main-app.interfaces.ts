@@ -1,7 +1,7 @@
-import { stylesBlock } from "../styles-block/styles-block.interfaces";
+import { StylesBlock } from '../styles-block/styles-block.interfaces';
 
-export interface mainConstructBlock {
-  id: string,
-  placeholder: string,
-  styles: stylesBlock
+export interface MainConstructBlock {
+  id: string;
+  placeholder: string;
+  styles: StylesBlock;
 }

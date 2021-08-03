@@ -9,14 +9,8 @@
   </div>
 
   <div *ngIf="email?.length !== 0" class="header__autoriz">
-    <p class="header__autoriz-email">{{email}}</p>
-    <a
-      class="header__autoriz-link"
-      [routerLink]="['/login']"
-      (click)="logout()"
-    >
-      Logout
-    </a>
+    <p class="header__autoriz-email">{{ email }}</p>
+    <a class="header__autoriz-link" [routerLink]="['/login']" (click)="logout()"> Logout </a>
   </div>
 </header>
 

@@ -1,59 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth.service';
 import { getEmail } from '../reducers/email';
 
-import { loginUserData } from './login.interfaces';
-import { tokenInterface } from '../interface/ItokenInterface';
-
+import { LoginUserData } from './login.interfaces';
+import { TokenInterface } from '../interface/ItokenInterface';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  constructor(private authService: AuthService, private router: Router, private store: Store) {}
 
-  constructor(private authService: AuthService,
-    private router: Router,
-    private store: Store) { }
+  // ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  public loginUserData: loginUserData = {
+  public loginUserData: LoginUserData = {
     email: '',
-    password: ''
-  }
+    password: '',
+  };
 
-  public emailInvalid: boolean = false
-  public passwordInvalid: boolean = false
+  public emailInvalid: boolean = false;
+
+  public passwordInvalid: boolean = false;
 
   public change(): void {
-    this.emailInvalid = false
-    this.passwordInvalid = false
+    this.emailInvalid = false;
+    this.passwordInvalid = false;
   }
 
   public loginUser(): void {
-    this.authService.loginUser(this.loginUserData)
-      .subscribe(
-        (res: tokenInterface) => {
-          this.store.dispatch(getEmail({email: this.loginUserData.email}))
-          localStorage.setItem('token', String(res.token))
-          this.router.navigate(['/'])
-        },
-        (err) => {
-          if (err.error === 'Invalid email') {
-            this.emailInvalid = true
-          } else {
-            this.passwordInvalid = true
-          }
+    this.authService.loginUser(this.loginUserData).subscribe(
+      (res: TokenInterface) => {
+        this.store.dispatch(getEmail({ email: this.loginUserData.email }));
+        localStorage.setItem('token', String(res.token));
+        this.router.navigate(['/']);
+      },
+      (err) => {
+        if (err.error === 'Invalid email') {
+          this.emailInvalid = true;
+        } else {
+          this.passwordInvalid = true;
         }
-      )
+      },
+    );
 
-    this.loginUserData.password = ''
+    this.loginUserData.password = '';
   }
-
 }
+
+export default LoginComponent;

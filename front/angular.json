@@ -1,7 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "8f907325-1722-497e-9a62-414514cb2e49"
+    "analytics": "8f907325-1722-497e-9a62-414514cb2e49",
+    "defaultCollection": "@angular-eslint/schematics"
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -112,6 +113,15 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {}
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }

@@ -1,26 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component, EventEmitter, Input, Output,
+} from '@angular/core';
 
-import { mainConstructBlock } from '../main-app/main-app.interfaces';
-
+import { MainConstructBlock } from '../main-app/main-app.interfaces';
 
 @Component({
   selector: 'app-drag-block',
   templateUrl: './drag-block.component.html',
-  styleUrls: ['./drag-block.component.scss']
+  styleUrls: ['./drag-block.component.scss'],
 })
-export class DragBlockComponent implements OnInit {
+export class DragBlockComponent {
+  @Input() public item!: MainConstructBlock;
 
-  @Input() public item!: mainConstructBlock
-  @Input() public check?: boolean
+  @Input() public check?: boolean;
 
-  @Output() public onAdd = new EventEmitter()
+  @Output() public add = new EventEmitter();
 
-  constructor() { }
+  // constructor() {}
 
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {}
 
-  public onClick(item: mainConstructBlock): void {
-    this.onAdd.emit(item)
+  public onClick(item: MainConstructBlock): void {
+    this.add.emit(item);
   }
 }
+
+export default DragBlockComponent;

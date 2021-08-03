@@ -1,6 +1,6 @@
-import { mainConstructBlock } from "../main-app/main-app.interfaces";
+import { MainConstructBlock } from '../main-app/main-app.interfaces';
 
-export interface userOption {
-  email?: string,
-  option?: Array<mainConstructBlock>
+export interface UserOption {
+  email?: string;
+  option?: Array<MainConstructBlock>;
 }
